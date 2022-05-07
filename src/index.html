@@ -62,31 +62,13 @@
         <table class="table table-hover table-sm">
           <thead class="thead-dark">
             <tr>
-              <th role="button">ФИО &#129171</th>
-              <th role="button">Факультет &#129171</th>
-              <th role="button">Дата рождения &#129171</th>
-              <th role="button">Даты обучения &#129171</th>
+              <th role="button" id="sort-name">ФИО &#129171</th>
+              <th role="button" id="sort-faculty">Факультет &#129171</th>
+              <th role="button" id="sort-birthdate">Дата рождения &#129171</th>
+              <th role="button" id="sort-start-year">Даты обучения &#129171</th>
             </tr>
           </thead>
           <tbody>
-            <!-- <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-              <td>john@example.com</td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-              <td>john@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-              <td>john@example.com</td>
-            </tr> -->
           </tbody>
         </table>
       </div>
@@ -97,11 +79,11 @@
     <div class="row">
       <h2 class="h4 mb-3 col-12">Добавить студента</h2>
 
-      <form action="/action_page.php" class="col" novalidate>
+      <form class="col add-student-form" novalidate>
         <div class="row">
           <div class="form-group col-4 input-group-sm">
             <label class="mb-1" for="surname">Фамилия:</label>
-            <input type="text" class="form-control" id="name" placeholder="Введите фамилию" name="surname" required>
+            <input type="text" class="form-control" id="surname" placeholder="Введите фамилию" name="surname" required>
             <div class="invalid-feedback"></div>
           </div>
           <div class="form-group col-4 input-group-sm">
@@ -111,7 +93,7 @@
           </div>
           <div class="form-group col-4 input-group-sm">
             <label class="mb-1" for="middle-name">Отчество:</label>
-            <input type="text" class="form-control" id="name" placeholder="Введите отчество" name="middle-name" required>
+            <input type="text" class="form-control" id="middle-name" placeholder="Введите отчество" name="middle-name" required>
             <div class="invalid-feedback"></div>
           </div>
         </div>
@@ -119,7 +101,7 @@
         <div class="row mb-3">
           <div class="form-group col-4 input-group-sm">
             <label class="mb-1" for="birthdate">Дата рождения:</label>
-            <input type="date" class="form-control" id="name" placeholder="Укажите дату рождения" name="birthdate"
+            <input type="date" class="form-control" id="birthdate" placeholder="Укажите дату рождения" name="birthdate"
               required>
             <div class="invalid-feedback"></div>
           </div>
@@ -131,8 +113,8 @@
           </div>
 
           <div class="form-group col-4 input-group-sm">
-            <label class="mb-1" for="faculty">Год начала обучения:</label>
-            <input type="text" class="form-control" id="startYear" placeholder="Введите факультет" name="startYear" required>
+            <label class="mb-1" for="start-year">Год начала обучения:</label>
+            <input type="text" class="form-control" id="start-year" placeholder="Введите год начала обучения" name="start-year" required>
             <div class="invalid-feedback"></div>
           </div>
 
