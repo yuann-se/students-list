@@ -21,7 +21,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">ФИО</span>
           </div>
-          <input type="text" class="form-control">
+          <input id="filter-name" type="text" class="filter form-control">
         </div>
       </form>
 
@@ -30,7 +30,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Год начала обучения</span>
           </div>
-          <input type="number" class="form-control">
+          <input id="filter-start-year" type="number" class="filter form-control">
         </div>
       </form>
 
@@ -39,7 +39,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Факультет</span>
           </div>
-          <input type="text" class="form-control">
+          <input id="filter-faculty" type="text" class="filter form-control">
         </div>
       </form>
 
@@ -48,7 +48,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Год окончания обучения</span>
           </div>
-          <input type="number" class="form-control">
+          <input id="filter-end-year" type="number" class="filter form-control">
         </div>
       </form>
 
@@ -93,7 +93,8 @@
           </div>
           <div class="form-group col-4 input-group-sm">
             <label class="mb-1" for="middle-name">Отчество:</label>
-            <input type="text" class="form-control" id="middle-name" placeholder="Введите отчество" name="middle-name" required>
+            <input type="text" class="form-control" id="middle-name" placeholder="Введите отчество" name="middle-name"
+              required>
             <div class="invalid-feedback"></div>
           </div>
         </div>
@@ -108,13 +109,15 @@
 
           <div class="form-group col-4 input-group-sm">
             <label class="mb-1" for="faculty">Факультет:</label>
-            <input type="text" class="form-control" id="faculty" placeholder="Введите факультет" name="faculty" required>
+            <input type="text" class="form-control" id="faculty" placeholder="Введите факультет" name="faculty"
+              required>
             <div class="invalid-feedback"></div>
           </div>
 
           <div class="form-group col-4 input-group-sm">
             <label class="mb-1" for="start-year">Год начала обучения:</label>
-            <input type="text" class="form-control" id="start-year" placeholder="Введите год начала обучения" name="start-year" required>
+            <input type="number" class="form-control" id="start-year" placeholder="Введите год начала обучения"
+              name="start-year" required>
             <div class="invalid-feedback"></div>
           </div>
 
