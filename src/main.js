@@ -6,6 +6,7 @@ let studentsArray = [
     birthdate: new Date(1999, 11, 13),
     startYear: 2021,
     faculty: "Сериаловедение",
+    id: 1
   },
   {
     surname: "Цой",
@@ -14,6 +15,7 @@ let studentsArray = [
     birthdate: new Date(1962, 5, 21),
     startYear: 2010,
     faculty: "Философия бессмертия",
+    id: 2
   },
   {
     surname: "Ололоев",
@@ -22,6 +24,7 @@ let studentsArray = [
     birthdate: new Date(1986, 7, 22),
     startYear: 2018,
     faculty: "Мемология",
+    id: 3
   },
   {
     surname: "Раскольников",
@@ -30,6 +33,7 @@ let studentsArray = [
     birthdate: new Date(1999, 10, 11),
     startYear: 2019,
     faculty: "Финансовая аналитика",
+    id: 4
   },
   {
     surname: "Узумаки",
@@ -38,6 +42,7 @@ let studentsArray = [
     birthdate: new Date(2003, 0, 30),
     startYear: 2020,
     faculty: "Зоопсихология",
+    id: 5
   },
   {
     surname: "Сидоров",
@@ -46,6 +51,7 @@ let studentsArray = [
     birthdate: new Date(2013, 7, 22),
     startYear: 2019,
     faculty: "Диванная политология",
+    id: 6
   },
   {
     surname: "Леннон",
@@ -54,6 +60,7 @@ let studentsArray = [
     birthdate: new Date(1940, 9, 9),
     startYear: 2000,
     faculty: "Востоковедение",
+    id: 7
   },
   {
     surname: "Чепмен",
@@ -62,6 +69,7 @@ let studentsArray = [
     birthdate: new Date(1955, 4, 10),
     startYear: 2008,
     faculty: "Стрелково-пушечное вооружение",
+    id: 8
   },
   {
     surname: "Элрик",
@@ -70,6 +78,7 @@ let studentsArray = [
     birthdate: new Date(2005, 10, 10),
     startYear: 2020,
     faculty: "Органическая алхимия",
+    id: 9
   },
 
   {
@@ -79,6 +88,7 @@ let studentsArray = [
     birthdate: new Date(1985, 5, 23),
     startYear: 2018,
     faculty: "Астрология козерогов",
+    id: 10
   },
 
   {
@@ -88,6 +98,7 @@ let studentsArray = [
     birthdate: new Date(1995, 2, 12),
     startYear: 2020,
     faculty: "3D-анимация ",
+    id: 11
   },
   {
     surname: "Бердымухамедов",
@@ -96,6 +107,7 @@ let studentsArray = [
     birthdate: new Date(1981, 6, 29),
     startYear: 2017,
     faculty: "Логопедия",
+    id: 12
   },
 ];
 
@@ -109,6 +121,7 @@ function createTable(array) {
   array.forEach((element) => {
     let tr = table.insertRow();
     tr.classList.add("content-row");
+    tr.setAttribute('id', element.id);
 
     tr.insertCell(
       0
@@ -217,72 +230,7 @@ function validateForm() {
 document.addEventListener("DOMContentLoaded", () => {
   createTable(studentsArray);
 
-  validateForm();
-
-  document.querySelector(".add-student-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    allInputs.forEach((input) => {
-      if (!input.value.toString().trim()) {
-        input.parentNode.childNodes[5].classList.add("d-block");
-        input.parentNode.childNodes[5].textContent = "Это поле обязательно";
-        input.style.borderColor = "#dc3545";
-      }
-    });
-
-    if (
-      !allInputs.some((input) =>
-        input.parentNode.childNodes[5].classList.contains("d-block")
-      )
-    ) {
-      let newStudent = {};
-      newStudent.surname = document.getElementById("surname").value;
-      newStudent.givenName = document.getElementById("name").value;
-      newStudent.middleName = document.getElementById("middle-name").value;
-      newStudent.birthdate = document.getElementById("birthdate").valueAsDate;
-      newStudent.faculty = document.getElementById("faculty").value;
-      newStudent.startYear = Number(
-        document.getElementById("start-year").value
-      );
-      studentsArray.push(newStudent);
-
-      allInputs.forEach((input) => (input.value = null));
-
-      createTable(studentsArray);
-    }
-  });
-
-  document.getElementById("sort-name").addEventListener("click", () => {
-    let sortedArray = studentsArray.sort((a, b) =>
-      a.surname + a.givenName + a.middleName >
-        b.surname + b.givenName + b.middleName
-        ? 1
-        : -1
-    );
-    createTable(sortedArray);
-  });
-
-  document.getElementById("sort-faculty").addEventListener("click", () => {
-    let sortedArray = studentsArray.sort((a, b) =>
-      a.faculty > b.faculty ? 1 : -1
-    );
-    createTable(sortedArray);
-  });
-
-  document.getElementById("sort-birthdate").addEventListener("click", () => {
-    let sortedArray = studentsArray.sort((a, b) =>
-      a.birthdate < b.birthdate ? 1 : -1
-    );
-    createTable(sortedArray);
-  });
-
-  document.getElementById("sort-start-year").addEventListener("click", () => {
-    let sortedArray = studentsArray.sort((a, b) =>
-      a.startYear < b.startYear ? 1 : -1
-    );
-    createTable(sortedArray);
-  });
-
+  // Фильтры
   const filterName = document.getElementById("filter-name");
   const filterFaculty = document.getElementById("filter-faculty");
   const filterStartYear = document.getElementById("filter-start-year");
@@ -410,5 +358,89 @@ document.addEventListener("DOMContentLoaded", () => {
       createTable(filteredArray);
       filteredArray = studentsArray;
     } else createTable(filteredArray);
+  });
+
+  // Сортировка
+
+  function getFilteredArray() {
+    filteredArray = [];
+    document.querySelectorAll('.content-row').forEach((row) => {
+      studentsArray.forEach((student) => {
+        if (student.id == row.attributes.id.value) {
+          filteredArray.push(student);
+        }
+      })
+    })
+  }
+
+  document.getElementById("sort-name").addEventListener("click", () => {
+    getFilteredArray();
+    let sortedArray = filteredArray.sort((a, b) =>
+      a.surname + a.givenName + a.middleName >
+        b.surname + b.givenName + b.middleName
+        ? 1
+        : -1
+    );
+    createTable(sortedArray);
+  });
+
+  document.getElementById("sort-faculty").addEventListener("click", () => {
+    getFilteredArray();
+    let sortedArray = filteredArray.sort((a, b) =>
+      a.faculty > b.faculty ? 1 : -1
+    );
+    createTable(sortedArray);
+  });
+
+  document.getElementById("sort-birthdate").addEventListener("click", () => {
+    getFilteredArray();
+    let sortedArray = filteredArray.sort((a, b) =>
+      a.birthdate < b.birthdate ? 1 : -1
+    );
+    createTable(sortedArray);
+  });
+
+  document.getElementById("sort-start-year").addEventListener("click", () => {
+    getFilteredArray();
+    let sortedArray = filteredArray.sort((a, b) =>
+      a.startYear < b.startYear ? 1 : -1
+    );
+    createTable(sortedArray);
+  });
+
+  // Форма добавления нового студента
+  validateForm();
+  document.querySelector(".add-student-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    allInputs.forEach((input) => {
+      if (!input.value.toString().trim()) {
+        input.parentNode.childNodes[5].classList.add("d-block");
+        input.parentNode.childNodes[5].textContent = "Это поле обязательно";
+        input.style.borderColor = "#dc3545";
+      }
+    });
+
+    if (
+      !allInputs.some((input) =>
+        input.parentNode.childNodes[5].classList.contains("d-block")
+      )
+    ) {
+      let newStudent = {};
+      newStudent.surname = document.getElementById("surname").value;
+      newStudent.givenName = document.getElementById("name").value;
+      newStudent.middleName = document.getElementById("middle-name").value;
+      newStudent.birthdate = document.getElementById("birthdate").valueAsDate;
+      newStudent.faculty = document.getElementById("faculty").value;
+      newStudent.startYear = Number(
+        document.getElementById("start-year").value
+      );
+      newStudent.id = studentsArray.length + 1;
+      studentsArray.push(newStudent);
+
+      allInputs.forEach((input) => (input.value = null));
+
+      createTable(studentsArray);
+    }
   });
 });
